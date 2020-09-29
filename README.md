@@ -1,6 +1,50 @@
-# terraform-azurerm-security-center
- Terraform module to create Azure Security Center resources for Azure Landing Zones
+# Security Center Terraform module
 
+Azure Security Center is a unified infrastructure security management system that strengthens the security posture of your data centers, and provides advanced threat protection across your hybrid workloads in the cloud. This module helps you to create Azure Security Center resources for Azure Landing Zones.
+
+## Module Usage
+
+```hcl
+module "security-center" {
+  source  = "kumarvna/security-center/azurerm"
+  version = "1.0.0"
+
+  # Resource Group, location, log analytics details
+  resource_group_name          = "rg-shared-westeurope-01"
+  log_analytics_workspace_name = "loganalytics-we-sharedtest"
+
+  # Subscription Security Center contacts
+  # One or more email addresses seperated by commas
+  security_center_contacts = {
+    email               = "abc@xyz.com, xyz@abc.com"
+    phone               = "+919765800967"
+    alert_notifications = true
+    alerts_to_admins    = true
+  }
+}
+```
+
+## Requirements
+
+Name | Version
+-----|--------
+terraform | >= 0.13
+azurerm | ~> 2.27
+
+## Providers
+
+| Name | Version |
+|------|---------|
+azurerm | 2.27.0
+
+## Inputs
+
+Name | Description | Type | Default
+---- | ----------- | ---- | -------
+`resource_group_name` | The name of the resource group in which resources are created | string | `""`
+`log_analytics_workspace_name`|The name of log analytics workspace name|string|`""`
+`security_center_contacts`|Manages the subscription's Security Center Contact|object|{}
+`scope_resource_id`|The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope|string|`current Subscripion id`
 
 ## Outputs
 
@@ -9,3 +53,16 @@ Name | Description
 `security_center_workspace_id`|The Security Center Workspace resource ID
 `security_center_subscription_pricing_id`|The subscription pricing resource ID
 `security_center_contact_id`|The Security Center Contact resource ID
+
+## Resource Graph
+
+![Resource Graph](graph.png)
+
+## Authors
+
+Originally created by [Kumaraswamy Vithanala](mailto:kumarvna@gmail.com)
+
+## Other resources
+
+* [Azure Security Center](https://docs.microsoft.com/en-us/azure/security-center/security-center-introduction)
+* [Terraform AzureRM Provider Documentation](https://www.terraform.io/docs/providers/azurerm/index.html)

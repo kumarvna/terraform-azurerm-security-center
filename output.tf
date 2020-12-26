@@ -10,5 +10,5 @@ output "security_center_subscription_pricing_id" {
 
 output "security_center_contact_id" {
   description = "The Security Center Contact ID"
-  value       = [for s in azurerm_security_center_contact.main : s.id]
+  value       = azurerm_security_center_contact.main.id
 }

@@ -37,10 +37,8 @@ resource "azurerm_security_center_subscription_pricing" "main" {
 # Azure Security Center Contact Resources
 #----------------------------------------------------------
 resource "azurerm_security_center_contact" "main" {
-  for_each            = var.security_center_contacts
   email               = lookup(var.security_center_contacts, "email")
-  phone               = lookup(var.security_center_contacts, "phone")
+  phone               = lookup(var.security_center_contacts, "phone", null)
   alert_notifications = lookup(var.security_center_contacts, "alert_notifications", true)
   alerts_to_admins    = lookup(var.security_center_contacts, "alerts_to_admins", true)
 }
-

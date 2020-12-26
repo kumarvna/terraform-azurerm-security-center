@@ -17,7 +17,7 @@ module "security-center" {
   # One or more email addresses seperated by commas not supported by Azure proivider currently
   security_center_contacts = {
     email               = "abc@xyz.com"   # must be a valid email address
-    phone               = "+919765800967" # Optional
+    phone               = "+919010910910" # Optional
     alert_notifications = true
     alerts_to_admins    = true
   }

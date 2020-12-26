@@ -14,6 +14,7 @@ variable "security_center_subscription_pricing" {
 }
 
 variable "security_center_contacts" {
+  type        = map(string)
   description = "Manages the subscription's Security Center Contact"
   default     = {}
 }

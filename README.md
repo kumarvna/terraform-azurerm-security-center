@@ -11,6 +11,7 @@ module "security-center" {
   source  = "kumarvna/security-center/azurerm"
   version = "1.1.0"
 
+
   # Resource Group, location, log analytics details
   resource_group_name          = "rg-shared-westeurope-01"
   log_analytics_workspace_name = "loganalytics-we-sharedtest2"
@@ -20,7 +21,7 @@ module "security-center" {
   security_center_setting_name   = "MCAS"
 
   # Enable auto provision of log analytics agents on VM's if they doesn't exist. 
-  enable_security_center_auto_provisioning = on
+  enable_security_center_auto_provisioning = "On"
 
   # Subscription Security Center contacts
   # One or more email addresses seperated by commas not supported by Azure proivider currently

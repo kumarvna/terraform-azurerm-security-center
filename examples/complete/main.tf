@@ -12,7 +12,7 @@ module "security-center" {
   security_center_setting_name   = "MCAS"
 
   # Enable auto provision of log analytics agents on VM's if they doesn't exist. 
-  enable_security_center_auto_provisioning = on
+  enable_security_center_auto_provisioning = "On"
 
   # Subscription Security Center contacts
   # One or more email addresses seperated by commas not supported by Azure proivider currently

@@ -30,7 +30,8 @@ resource "azurerm_security_center_workspace" "main" {
 #----------------------------------------------------------
 
 resource "azurerm_security_center_subscription_pricing" "main" {
-  tier = var.security_center_subscription_pricing
+  tier          = var.security_center_subscription_pricing
+  resource_type = var.resource_type
 }
 
 #----------------------------------------------------------
@@ -41,4 +42,15 @@ resource "azurerm_security_center_contact" "main" {
   phone               = lookup(var.security_center_contacts, "phone", null)
   alert_notifications = lookup(var.security_center_contacts, "alert_notifications", true)
   alerts_to_admins    = lookup(var.security_center_contacts, "alerts_to_admins", true)
+}
+
+resource "azurerm_security_center_setting" "main" {
+  count        = var.enable_security_center_setting ? 1 : 0
+  setting_name = var.security_center_setting_name
+  enabled      = var.enable_security_center_setting
+}
+
+resource "azurerm_security_center_auto_provisioning" "main" {
+  count          = var.enable_security_center_auto_provisioning == "On" ? 1 : 0
+  auto_provision = var.enable_security_center_auto_provisioning
 }
